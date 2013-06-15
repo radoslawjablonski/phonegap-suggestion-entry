@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Sugg helper sample page for testing </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="format-detection" content="telephone=no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+<link rel="stylesheet" type="text/css" href="css/style.css" media="screen" />
+
+<!-- Phonegap includes -->
+<script type="text/javascript" src="cordova-2.7.0.js"></script>
+<script type="text/javascript" src="js_common/phonegap_main.js"></script>
+<script type="text/javascript">
+    app.initialize();
+</script>
+
+<!-- Sugg helper plugin includes -->
+<script src="js_common/jquery-1.8.2.js" type="text/javascript"></script>
+<script src="js_common/jquery.nicescroll.min.js" type="text/javascript"></script><!-- nice scroll-->
+<script src="sugg_helper.js" type="text/javascript"></script>
+<script>
+$(document).ready(function () {		
+	var mySuggestionsArray = [ "jabko666@gmail.com",
+				"radek@hotmail.com",
+				"jabko667@gmail.com",
+				"jabko668@gmail.com",
+				"jaskier@wiedzmin.com",
+				"jabko555@zdnet.pl",
+				"zzz@wp.pl" ];
+
+	// configuration is possible via defaults property
+	$.fn.mobileSuggHelper.defaults.useNiceScrollbar = true;
+	
+	// ... or by second parameter
+	$('#mailAddrInputField').mobileSuggHelper(mySuggestionsArray,
+						  {maxNumberOfSuggElements:2});
+});
+</script>
+</head>
+
+<body onload="">
+<div id="tellFriendSection">
+	<p class="mobileFontMediumGray tellFriendP">Enter sample email address:</p>
+<input data-role="none" id="mailAddrInputField" class="tInputField" type="text" value=""></input>
+
+<div class="actionButtonContainer">
+<a href="#" id="sendInvitationButton" class="blueClickableButton"
+ onclick="alert($('#mailAddrInputField').val() + ' was selected')">Test input field</a>
+</div><!-- end button container  -->
+</div>
+</body>
+</html>

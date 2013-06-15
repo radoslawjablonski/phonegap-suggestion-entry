@@ -1,0 +1,156 @@
+body {
+	background: white;
+}
+
+#mainContent {
+	float: left;
+	width: 100%;
+}
+
+/* fonts */
+span.mobileFontLargeBlack,p.mobileFontLargeBlack {
+	color: black;
+	font: 34px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontLargeGray,p.mobileFontLargeGray {
+	color: #999999;
+	font: 30px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontLargeLBlue,p.mobileFontLargeLBlue {
+	color: #0395d9;
+	font: 30px Verdana, Arial, Helvetica, sans-serif;
+}
+
+/*medium L(arger) */
+span.mobileFontMediumLGray,p.mobileFontMediumLGray {
+	color: #999999;
+	font: 22px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontMediumLWhite,p.mobileFontMediumLWhite {
+	color: white;
+	font: 22px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontMediumLLBlue,p.mobileFontMediumLLBlue {
+	color: #109bdc;
+	font: 22px Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* medium standard*/
+span.mobileFontMediumGray,p.mobileFontMediumGray {
+	color: #999999;
+	font: 18px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontMediumWhite,p.mobileFontMediumWhite {
+	color: white;
+	font: 18px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontMediumLBlue,p.mobileFontMediumLBlue {
+	color: #0395d9;
+	font: 18px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontSmallGray,p.mobileFontSmallGray, div.mobileFontSmallGray {
+	color: #999999;
+	font: 14px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontSmallLBlue,p.mobileFontSmallLBlue {
+	color: #0395d9;
+	font: 14px Verdana, Arial, Helvetica, sans-serif;
+}
+
+span.mobileFontSmallWhite,p.mobileFontSmallWhite {
+	color: white;
+	font: 12px Verdana, Arial, Helvetica, sans-serif;
+}
+
+/* dashboard */
+#dashboardHolder {
+	margin-top: 10%;
+}
+
+#paymentConfirmTitle {
+}
+
+div.popupBody div.buttonContainer {
+	padding-top: 20px;
+	height: 60px;
+}
+
+div.popupBody div.buttonContainer div.rightButton {
+	width: 100px;
+	float:right;
+}
+
+div.popupBody div.buttonContainer div.leftButton {
+	width: 100px;
+	float:left;
+}
+
+div.popupBody div.buttonContainer div.centerButton {
+	width: 100px;
+	margin: 0 auto;
+}
+
+/* tell a friend*/
+#tellFriendSection {
+	padding-top: 90px;
+	margin: 0 auto;
+	width: 90%;
+}
+
+#sendInvitationButton {
+	width: 100%;
+}
+
+#tellFriendTopSection p{
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+div.actionButtonContainer {
+	background-color: #0395d9;
+	width: 100%;
+	height: 34px;
+}
+
+div.blueClickableButton, a.blueClickableButton{
+       font: 22px Verdana, Arial, Helvetica, sans-serif;
+	display : -webkit-box;
+	-webkit-box-pack: center;
+	-webkit-box-align: center;
+	display: -webkit-box;
+       
+}
+
+input.tInputField, textarea.tInputField {
+	box-sizing:border-box; /* for not going outside div with border*/
+	border: 1px solid #0395d9;
+	color:  #999999;
+	
+	width: 100%;
+}
+
+input#mailAddrInputField {
+	position: relative;
+	z-index: 3;
+}
+
+p.tellFriendP {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+a#sendInvitationButton, a#sendInvitationButton:hover, a#sendInvitationButton:focus, a#sendInvitationButton:active {
+	color: white;
+	text-decoration: none;
+}
+
+
+
