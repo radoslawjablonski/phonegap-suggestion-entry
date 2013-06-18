@@ -158,18 +158,15 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		// insted counting and using whole space above manually. Then user of that library
 		// is responsible for keeping content in the screen
 		var possibleVisiblePopupHeigth = 0;
-		if (conf.maxNumberOfSuggElements > 0) {
-			possibleVisiblePopupHeigth = conf.maxNumberOfSuggElements * heightDiff;
-		} else {
-			if (true == conf.popOnTop) {
-				possibleVisiblePopupHeigth = positionInputTop -
+
+		if (true == conf.popOnTop) {
+		    possibleVisiblePopupHeigth = positionInputTop -
 							(heightDiff + conf.inputEntryTopMargin);
-			} else {
-				possibleVisiblePopupHeigth = $(window).height()
-								- positionInputTop
-								- suggestionHolder.outerHeight(true)
-								- heightDiff; // to allow some space below
-			}
+		} else {
+		    possibleVisiblePopupHeigth = $(window).height()
+		                                 - positionInputTop
+		                                 - suggestionHolder.outerHeight(true)
+		                                 - heightDiff; // to allow some space below
 		}
 		
 		if (heightNew <= (possibleVisiblePopupHeigth - heightDiff)) {
@@ -348,11 +345,7 @@ $.fn.mobileSuggHelper.defaults = {
 	acceptableMaxFilterLen : 10,
 	inputEntryTopMargin : 0,
 	useNiceScrollbar : true,
-	popOnTop : true, // if false then popup will be shown below text input
-	maxNumberOfSuggElements : 0, // number of visible elements without scroll
-				    // if '0' then component will use max available space
-				// for suggestion popup on the screen. Remaining results
-				 // will be available to click after scrolling
+	popOnTop : true // if false then popup will be shown below text input
 	}
 	
 }( jQuery ));
