@@ -9,6 +9,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 	var popupSuggestionQId = '#entrySuggestionPopup';
 	var privPopupSuggestionObj = null;
+	var isPopupHidden = true;
 	
 	// initializing events
 	var initEvents = function () {
@@ -18,7 +19,10 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 		$(window).resize(function() {
 			// handle resizing of window, passing true as param meaning resize event only
-			correctSizeAndPosOfPopup(true);
+			if (false == isPopupHidden) {
+				correctSizeAndPosOfPopup(true);
+				grayOut(true, {zindex: 1});//re-painting gray area
+			}
 		});
 	};
 	
@@ -56,6 +60,8 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	// a: there are no results
 	// b: when filter is empty
 	var hideSuggestionPopup = function (hide) {
+		isPopupHidden = hide;
+		 
 		if (hide == true) {
 			getPopupSuggestionObj().css('visibility', 'hidden');
 			grayOut(false);
