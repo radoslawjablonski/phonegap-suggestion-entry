@@ -180,10 +180,6 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			console.log("Content reached max possible size")
 		 	heightNew = possibleVisiblePopupHeigth;
 			
-			// actually adding some more pixels to notify user that content can
-			// be scrolled - let's try to add 1/2 of single popup
-			heightNew += (heightDiff / 2 )
-			
 			if (!conf.useNiceScrollbar) {
 				getPopupSuggestionObj().css('overflow', 'auto');
 			}
