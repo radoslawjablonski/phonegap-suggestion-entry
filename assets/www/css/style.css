@@ -70,14 +70,6 @@ span.mobileFontSmallWhite,p.mobileFontSmallWhite {
 	font: 12px Verdana, Arial, Helvetica, sans-serif;
 }
 
-/* dashboard */
-#dashboardHolder {
-	margin-top: 10%;
-}
-
-#paymentConfirmTitle {
-}
-
 div.popupBody div.buttonContainer {
 	padding-top: 20px;
 	height: 60px;
@@ -100,7 +92,7 @@ div.popupBody div.buttonContainer div.centerButton {
 
 /* tell a friend*/
 #tellFriendSection {
-	padding-top: 90px;
+	padding-top: 140px;
 	margin: 0 auto;
 	width: 90%;
 }
@@ -115,6 +107,7 @@ div.popupBody div.buttonContainer div.centerButton {
 }
 
 div.actionButtonContainer {
+	margin-top: 5px;
 	background-color: #0395d9;
 	width: 100%;
 	height: 34px;
@@ -133,7 +126,8 @@ input.tInputField, textarea.tInputField {
 	box-sizing:border-box; /* for not going outside div with border*/
 	border: 1px solid #0395d9;
 	color:  #999999;
-	
+	font: 18px Verdana, Arial, Helvetica, sans-serif;
+	height: 35px;
 	width: 100%;
 }
 
