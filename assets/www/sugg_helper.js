@@ -275,12 +275,9 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	      // Pass true to gray out screen, false to ungray
 	      // options are optional.  This is a JSON object with the following (optional) properties
 	      // opacity:0-100         // Lower number = less grayout higher = more of a blackout 
-	      // zindex: #             // HTML elements with a higher zindex appear on top of the gray out
-	      // bgcolor: (#xxxxxx)    // Standard RGB Hex color code
-	      // grayOut(true, {'zindex':'50', 'bgcolor':'#0000FF', 'opacity':'70'});
-	      // Because options is JSON opacity/zindex/bgcolor are all optional and can appear
 	      // in any order.  Pass only the properties you need to set.
-	      var options = options || {}; 
+	      var options = options || {};
+	      var hideOnClick = options.hideOnclick || false;
 	      var zindex = options.zindex || 50;
 	      var opacity = options.opacity || 70;
 	      var opaque = (opacity / 100);
@@ -320,10 +317,13 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	        dark.style.height= pageHeight;
 	        dark.style.display='block';
 	        
-	        //adding ontouch close
-	        addEventListener("click", 
+	        if (hideOnClick) {
+	        	//adding ontouch close
+	        	addEventListener("click", 
 	                function() {document.getElementById('darkenScreenObject').style.display='none'},
 	                false);
+	        }
+	        
 	      } else {
 	         dark.style.display='none';
 	      }
