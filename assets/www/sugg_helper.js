@@ -347,6 +347,9 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			color: #999999; \
 			height: 45px; \
 			font: 18px Verdana, Arial, Helvetica, sans-serif; \
+			padding-left: 5px; \
+			-webkit-box-align: center; \
+			display: -webkit-box; \
 			}\
 			\
 		</style>").appendTo("head")
