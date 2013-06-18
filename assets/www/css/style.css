@@ -91,7 +91,7 @@ div.popupBody div.buttonContainer div.centerButton {
 }
 
 /* tell a friend*/
-#tellFriendSection {
+#testInputSection {
 	padding-top: 140px;
 	margin: 0 auto;
 	width: 90%;
@@ -101,7 +101,7 @@ div.popupBody div.buttonContainer div.centerButton {
 	width: 100%;
 }
 
-#tellFriendTopSection p{
+#testInputSection p{
 	margin-top: 2px;
 	margin-bottom: 2px;
 }
