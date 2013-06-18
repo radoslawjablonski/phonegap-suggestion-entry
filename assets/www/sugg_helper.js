@@ -9,7 +9,6 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 	var popupSuggestionQId = '#entrySuggestionPopup';
 	var privPopupSuggestionObj = null;
-
 	
 	// initializing events
 	var initEvents = function () {
@@ -18,8 +17,8 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		});
 	
 		$(window).resize(function() {
-			// handle resizing of window
-			correctSizeAndPosOfPopup();
+			// handle resizing of window, passing true as param meaning resize event only
+			correctSizeAndPosOfPopup(true);
 		});
 	};
 	
@@ -143,7 +142,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 				+ suggestionHolder.position().top);
 	};
 	
-	var correctSizeAndPosOfPopup = function (rowAdded) {
+	var correctSizeAndPosOfPopup = function (resizeEventOnly) {
 		// handling popup size issue
 		// constants. Simple visualisation of problem is below
 		//
@@ -160,7 +159,12 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			
 		//... and also width of suggestion popup
 		getPopupSuggestionObj().css('width',  suggestionHolder.width());
-			
+		
+		if (resizeEventOnly) {
+			correctTopPosition();
+			return;
+		}
+		
 		// NOTE: use height from css in case of problems
 		var heightDiff = $(".suggRow").height();
 		
@@ -168,12 +172,13 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		// getting max available space on top - it will be equal to top position
 		// of input field
 		var positionInputTop = suggestionHolder.position().top;
-
+		
 		// if maxNumberOfSuggElements is defined, then using that value of max elements
 		// insted counting and using whole space above manually. Then user of that library
 		// is responsible for keeping content in the screen
 		var possibleVisiblePopupHeigth = 0;
 
+		// counting max space for popup
 		if (true == conf.popOnTop) {
 		    possibleVisiblePopupHeigth = positionInputTop -
 							(heightDiff + conf.inputEntryTopMargin);
