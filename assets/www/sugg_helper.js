@@ -128,7 +128,22 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		return privPopupSuggestionObj;
 	};
 	
-	var correctSizeAndPosOfPopup = function () {
+	var correctTopPosition = function () {
+		var topNew = suggestionHolder.position().top; 
+		
+		if (true == conf.popOnTop) {
+			topNew = topNew - conf.inputEntryTopMargin - getPopupSuggestionObj().height();
+		} else {
+			topNew += suggestionHolder.outerHeight(true);
+		}
+		
+	  	getPopupSuggestionObj().css('top', topNew);
+		console.log("Top: " + topNew + " Heigth popup: " + getPopupSuggestionObj().height() +
+				" pos input top:"
+				+ suggestionHolder.position().top);
+	};
+	
+	var correctSizeAndPosOfPopup = function (rowAdded) {
 		// handling popup size issue
 		// constants. Simple visualisation of problem is below
 		//
@@ -186,20 +201,13 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		}
     	
 	  	getPopupSuggestionObj().height(heightNew);
-	  	var topNew = positionInputTop;
-		if (true == conf.popOnTop) {
-			topNew = topNew - conf.inputEntryTopMargin - heightNew;
-		} else {
-			topNew += suggestionHolder.outerHeight(true);
-		}
-
-		console.log("Top: " + topNew + " Heigth: " + heightNew + " pos input top:" + positionInputTop);
-	  	getPopupSuggestionObj().css('top', topNew);
+	  	correctTopPosition();
 		
 		if (conf.useNiceScrollbar) {
 			// notyfying about size change - scrollbar will be have correct size
 			getPopupSuggestionObj().getNiceScroll().resize();
 		}
+		
 	};
 	
 	var addSuggestionToPopup = function (name) {
