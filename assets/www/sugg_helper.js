@@ -127,7 +127,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		return privPopupSuggestionObj;
 	};
 	
-	var correctTopPosition = function () {
+	var correctTopPositionOfPopup = function () {
 		var topNew = suggestionHolder.position().top; 
 		
 		if (true == conf.popOnTop) {
@@ -142,29 +142,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 				+ suggestionHolder.position().top);
 	};
 	
-	var correctSizeAndPosOfPopup = function (resizeEventOnly) {
-		// handling popup size issue
-		// constants. Simple visualisation of problem is below
-		//
-		// ######### var heightDiff
-		// # popup #
-		// ######### var inputEntryTopMargin 
-		// @input text
-		//
-		// var inputEntryTopMargin 
-
-		// setting correct left position to be right in line with input
-		var positionInputLeft = suggestionHolder.position().left;
-		getPopupSuggestionObj().css('left', positionInputLeft);
-			
-		//... and also width of suggestion popup
-		getPopupSuggestionObj().css('width',  suggestionHolder.width());
-		
-		if (resizeEventOnly) {
-			correctTopPosition();
-			return;
-		}
-		
+	var handleHeightOfPopup = function () {
 		// NOTE: use height from css in case of problems
 		var heightDiff = $(".suggRow").height();
 		
@@ -206,7 +184,33 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		}
     	
 	  	getPopupSuggestionObj().height(heightNew);
-	  	correctTopPosition();
+	}
+	
+	var correctSizeAndPosOfPopup = function (resizeEventOnly) {
+		// handling popup size issue
+		// constants. Simple visualisation of problem is below
+		//
+		// ######### var heightDiff
+		// # popup #
+		// ######### var inputEntryTopMargin 
+		// @input text
+		//
+		// var inputEntryTopMargin 
+
+		// setting correct left position to be right in line with input
+		var positionInputLeft = suggestionHolder.position().left;
+		getPopupSuggestionObj().css('left', positionInputLeft);
+			
+		//... and also width of suggestion popup
+		getPopupSuggestionObj().css('width',  suggestionHolder.width());
+		
+		if (resizeEventOnly) {
+			correctTopPositionOfPopup();
+			return;
+		}
+		
+		handleHeightOfPopup();
+		correctTopPositionOfPopup();
 		
 		if (conf.useNiceScrollbar) {
 			// notyfying about size change - scrollbar will be have correct size
