@@ -112,7 +112,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		if (privPopupSuggestionObj == null) {
 			console.log("Creating object for suggestion popup");
 			var popupSuggestionHtmlName = popupSuggestionQId.substr(1);
-			var suggestionDivHtml = "<div id=" + popupSuggestionHtmlName + "></div>"; 
+			var suggestionDivHtml = "<div id=" + popupSuggestionHtmlName + "></div>";
 			$("body").append(suggestionDivHtml);
 			
 			privPopupSuggestionObj = $(popupSuggestionQId);
@@ -208,7 +208,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		getPopupSuggestionObj().css('left', positionInputLeft);
 			
 		//... and also width of suggestion popup
-		getPopupSuggestionObj().css('width',  suggestionHolder.width());
+		getPopupSuggestionObj().css('width',  suggestionHolder.outerWidth(false)); //false means no-margin
 		
 		if (resizeEventOnly) {
 			correctTopPositionOfPopup();
