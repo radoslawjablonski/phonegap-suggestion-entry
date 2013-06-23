@@ -91,20 +91,25 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			}
 		} // end of suggestions
 		
+		// clearing prev results and real adding
+		clearPopup();
 		if (areResultsToShow == true) {
-			// clearing prev results and real adding
-			clearPopup();
 			for (var i = 0; i < resultsAfterFiltering.length; i++) {
-				addSuggestionToPopup(resultsAfterFiltering[i]);
-			}
-		 
-			// showing popup
-			console.log("Some results exists. Showing contacts popup");
-			hideSuggestionPopup(false);
+				addRowEntryToPopup(resultsAfterFiltering[i], true);
+			}		 
 		} else {
-			// no results to show - hiding popup
-			hideSuggestionPopup(true);
+			if (filterValue.length == 0) {
+				// filter is empty, hiding popup
+				hideSuggestionPopup(true);
+				return;
+			}
+			
+			addRowEntryToPopup("No results", false);
 		}
+		
+		// showing popup
+		console.log("Some results exists. Showing contacts popup");
+		hideSuggestionPopup(false);
 	};
     
 	var createSuggestionPopupDivIfNeeded = function () {
@@ -225,7 +230,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		
 	};
 	
-	var addSuggestionToPopup = function (name) {
+	var addRowEntryToPopup = function (name, clickable) {
 		createSuggestionPopupDivIfNeeded();
 
 	  	var contactRow = '<div class="suggRow"';
@@ -238,9 +243,12 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	  	contactRow += '</div>';
     	
 		getPopupSuggestionObj().append(contactRow);
-	  	document.getElementById(rowId).addEventListener("click", 
-	    		function() {onEmailRowClicked(name);},
-	    		false);
+		
+		if (clickable) {
+			document.getElementById(rowId).addEventListener("click", 
+				function() {onEmailRowClicked(name);},
+				false);
+		}
 		
 		// correcting size and position
 		correctSizeAndPosOfPopup();
