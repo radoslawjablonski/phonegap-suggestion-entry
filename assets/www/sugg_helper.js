@@ -364,7 +364,9 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	    };
 	    
 	 return this.filter( "input" ).each(function() {
+		// constructor
 		suggestionHolder = $(this);
+		createSuggestionPopupDivIfNeeded();
 		initEvents();
 		initSuggHelperCss();
 	});
