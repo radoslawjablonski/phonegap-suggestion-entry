@@ -155,7 +155,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 	var handleHeightOfPopup = function () {
 		// NOTE: use height from css in case of problems
-		var heightDiff = $(".suggRow").height();
+		var heightDiff = $('.' + conf.rowEntryCssClass).height();
 		
 		var heightNew = getPopupSuggestionObj().height();
 		// getting max available space on top - it will be equal to top position
@@ -233,7 +233,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	var addRowEntryToPopup = function (name, clickable) {
 		createSuggestionPopupDivIfNeeded();
 
-	  	var contactRow = '<div class="suggRow"';
+	  	var contactRow = '<div class="' + conf.rowEntryCssClass + '"';
 	  	var rowId = 'suggestion_'+ name;
 	  	contactRow += ' id="'+ rowId + '">';
     	
@@ -372,6 +372,7 @@ $.fn.mobileSuggHelper.defaults = {
 	inputEntryTopMargin : 0,
 	useNiceScrollbar : true,
 	popOnTop : true, // if false then popup will be shown below text input
+	rowEntryCssClass : 'suggRow',
 	popupHolderCss : {
 		'position': 'absolute',
 		'z-index': '3',
