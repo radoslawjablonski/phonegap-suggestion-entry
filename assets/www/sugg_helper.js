@@ -7,7 +7,6 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 	var conf = $.extend({}, $.fn.mobileSuggHelper.defaults, options); 
 	
-	var popupSuggestionQId = '#entrySuggestionPopup';
 	var privPopupSuggestionObj = null;
 	var isPopupHidden = true;
 	
@@ -116,11 +115,12 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		// jQuery always returns an object, so different checking is needed
 		if (privPopupSuggestionObj == null) {
 			console.log("Creating object for suggestion popup");
-			var popupSuggestionHtmlName = popupSuggestionQId.substr(1);
+			var popupSuggestionHtmlName = conf.popupSuggestionQId.substr(1);
 			var suggestionDivHtml = "<div id=" + popupSuggestionHtmlName + "></div>";
 			$("body").append(suggestionDivHtml);
 			
-			privPopupSuggestionObj = $(popupSuggestionQId);
+			privPopupSuggestionObj = $(conf.popupSuggestionQId);
+			privPopupSuggestionObj.css(conf.popupHolderCss);
 			
 			// setting correct left position to be right in line with input
 			var positionInputLeft = suggestionHolder.position().left;
@@ -342,14 +342,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		// moving here css style to achieve simple plugin use, don't need to include
 		// separate css file
 		$("<style type='text/css'> \
-		div#entrySuggestionPopup { \
-			position: absolute; \
-			z-index: 3; \
-			visibility: hidden; \
-			overflow: hidden; \
-			} \
-			\
-		div#entrySuggestionPopup div.suggRow { \
+		div.suggRow { \
 			background-color: white; \
 			border-bottom: 1px solid  #999999; \
 			color: #999999; \
@@ -373,11 +366,18 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 }
 
 // plugin defaults
-$.fn.mobileSuggHelper.defaults = {	
+$.fn.mobileSuggHelper.defaults = {
+	popupSuggestionQId : '#entrySuggestionPopup',
 	acceptableMaxFilterLen : 10,
 	inputEntryTopMargin : 0,
 	useNiceScrollbar : true,
-	popOnTop : true // if false then popup will be shown below text input
+	popOnTop : true, // if false then popup will be shown below text input
+	popupHolderCss : {
+		'position': 'absolute',
+		'z-index': '3',
+		'visibility': 'hidden',
+		'overflow': 'hidden'
+		}
 	}
 	
 }( jQuery ));
