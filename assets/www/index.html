@@ -20,13 +20,21 @@
 <script src="sugg_helper.js" type="text/javascript"></script>
 <script>
 $(document).ready(function () {		
-	var mySuggestionsArray = [ "jabko666@gmail.com",
-				"radek@hotmail.com",
-				"jabko667@gmail.com",
-				"jabko668@gmail.com",
-				"jaskier@wiedzmin.com",
-				"jabko555@zdnet.pl",
-				"zzz@wp.pl" ];
+	var mySuggestionsArray = [ 
+	                          "atestmail1@git.com",
+	                          "anothertestmail@zzz.net",
+	                          "radek1@testmail.com",
+	                          "radek2@mail.com",
+	                          "testemail1@wp.pl",
+	                          "testemail2@wp.pl",
+	                          "testemail3@net.net",
+	                          "testemail4@zibi.net",
+	                          "testemail5@hotmail.com",
+	                          "testemail5@net.net",
+	                          "testowymail@zuzu.pl",
+	                          "testemail666@git.com",
+	                          "testpurposeemail@wp.pl",
+	                          "zzztest@wp.pl"];
 
 	// configuration is possible via defaults property
 	$.fn.mobileSuggHelper.defaults.useNiceScrollbar = true;
@@ -39,6 +47,7 @@ $(document).ready(function () {
 </head>
 
 <body onload="">
+<p class="mobileFontMediumLLBlue">If you want to see some results, then start typing with 'a', t', 'r' or 'z' letters:</p>
 <div id="testInputSection">
 	<p class="mobileFontMediumGray tellFriendP">Enter sample email address:</p>
 <input data-role="none" id="mailAddrInputField" class="tInputField" type="text" value=""></input>
