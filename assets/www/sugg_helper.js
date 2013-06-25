@@ -3,7 +3,7 @@
 $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	// parameters from input context
 	var suggestionArray = inputSuggArray;
-	var suggestionHolder = null; //taken from $(this) in return-initializer
+	var targetSuggInput = null; //taken from $(this) in return-initializer
 	
 	var conf = $.extend({}, $.fn.mobileSuggHelper.defaults, options); 
 	
@@ -12,7 +12,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 	// initializing events
 	var initEvents = function () {
-		suggestionHolder.keydown(function(event) {
+		targetSuggInput.keydown(function(event) {
 		handleKeyDownPriv(event, this);
 		});
 	
@@ -123,11 +123,11 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			privPopupSuggestionObj.css(conf.popupHolderCss);
 			
 			// setting correct left position to be right in line with input
-			var positionInputLeft = suggestionHolder.position().left;
+			var positionInputLeft = targetSuggInput.position().left;
 			privPopupSuggestionObj.css('left', positionInputLeft);
 			
 			//... and also width of suggestion popup
-			privPopupSuggestionObj.css('width',  suggestionHolder.width());
+			privPopupSuggestionObj.css('width',  targetSuggInput.width());
 			
 			//enabling 'nice scroll' if available
 			if (conf.useNiceScrollbar) {
@@ -139,18 +139,18 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	};
 	
 	var correctTopPositionOfPopup = function () {
-		var topNew = suggestionHolder.position().top; 
+		var topNew = targetSuggInput.position().top; 
 		
 		if (true == conf.popOnTop) {
 			topNew = topNew - conf.inputEntryTopMargin - getPopupSuggestionObj().height();
 		} else {
-			topNew += suggestionHolder.outerHeight(true);
+			topNew += targetSuggInput.outerHeight(true);
 		}
 		
 	  	getPopupSuggestionObj().css('top', topNew);
 		console.log("Top: " + topNew + " Heigth popup: " + getPopupSuggestionObj().height() +
 				" pos input top:"
-				+ suggestionHolder.position().top);
+				+ targetSuggInput.position().top);
 	};
 	
 	var handleHeightOfPopup = function () {
@@ -160,7 +160,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		var heightNew = getPopupSuggestionObj().height();
 		// getting max available space on top - it will be equal to top position
 		// of input field
-		var positionInputTop = suggestionHolder.position().top;
+		var positionInputTop = targetSuggInput.position().top;
 		
 		// if maxNumberOfSuggElements is defined, then using that value of max elements
 		// insted counting and using whole space above manually. Then user of that library
@@ -174,7 +174,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		} else {
 		    possibleVisiblePopupHeigth = $(window).height()
 		                                 - positionInputTop
-		                                 - suggestionHolder.outerHeight(true)
+		                                 - targetSuggInput.outerHeight(true)
 		                                 - heightDiff; // to allow some space below
 		}
 		
@@ -209,11 +209,11 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		// var inputEntryTopMargin 
 
 		// setting correct left position to be right in line with input
-		var positionInputLeft = suggestionHolder.position().left;
+		var positionInputLeft = targetSuggInput.position().left;
 		getPopupSuggestionObj().css('left', positionInputLeft);
 			
 		//... and also width of suggestion popup
-		getPopupSuggestionObj().css('width',  suggestionHolder.outerWidth(false)); //false means no-margin
+		getPopupSuggestionObj().css('width',  targetSuggInput.outerWidth(false)); //false means no-margin
 		
 		if (resizeEventOnly) {
 			correctTopPositionOfPopup();
@@ -257,7 +257,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	function onEmailRowClicked(name) {
 		console.log("suggestion row clicked:"  + name);
     	
-		suggestionHolder.val(name);
+		targetSuggInput.val(name);
     	
 		//when row is clicked it means that we can safely close popup
 		hideSuggestionPopup(true);
@@ -297,7 +297,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		return;
 	      }
 	      
-	      if (suggestionHolder.css('z-index') < 2) {
+	      if (targetSuggInput.css('z-index') < 2) {
 		console.error("Error. When using 'shadowBackgroundMode' target text input entry 'z-index'\
 			      css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\
 			      \nPlease fix your css for input field or stop using shadowBackgroundMode.");
@@ -370,7 +370,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	    
 	 return this.filter( "input" ).each(function() {
 		// constructor
-		suggestionHolder = $(this);
+		targetSuggInput = $(this);
 		createSuggestionPopupDivIfNeeded();
 		initEvents();
 		initSuggHelperCss();
