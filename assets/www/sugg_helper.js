@@ -300,7 +300,9 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	      if (targetSuggInput.css('z-index') < 2) {
 		console.error("Error. When using 'shadowBackgroundMode' target text input entry 'z-index'\
 			      css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\
-			      \nPlease fix your css for input field or stop using shadowBackgroundMode.");
+			      \nPlease fix your css for input field or stop using shadowBackgroundMode\
+			      It can be done by passing {shadowBackgroundMode : false} as second param to \
+			      .mobileSuggHelper() on plugin init.");
 	      }
 	      
 	      if (!dark) {
@@ -356,7 +358,9 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		$("<style type='text/css'> \
 		div.suggRow { \
 			background-color: white; \
-			border-bottom: 1px solid  #999999; \
+			border-top: 1px solid  #999999; \
+			border-left: 1px solid  #999999; \
+			border-right: 1px solid  #999999; \
 			color: #999999; \
 			height: 45px; \
 			font: 18px Verdana, Arial, Helvetica, sans-serif; \
@@ -380,7 +384,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 // plugin defaults
 $.fn.mobileSuggHelper.defaults = {
 	popupSuggestionQId : '#entrySuggestionPopup',
-	shadowBackgroundMode : false,
+	shadowBackgroundMode : true,
 	acceptableMaxFilterLen : 10,
 	inputEntryTopMargin : 0,
 	useNiceScrollbar : true,
