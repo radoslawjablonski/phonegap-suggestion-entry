@@ -291,6 +291,18 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	      var opaque = (opacity / 100);
 	      var bgcolor = options.bgcolor || '#000000';
 	      var dark=document.getElementById('darkenScreenObject');
+	      
+	      if (false == conf.shadowBackgroundMode) {
+		// shadowBackgound mode disabled - doing nothing
+		return;
+	      }
+	      
+	      if (suggestionHolder.css('z-index') < 2) {
+		console.error("Error. When using 'shadowBackgroundMode' target text input entry 'z-index'\
+			      css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\
+			      \nPlease fix your css for input field or stop using shadowBackgroundMode.");
+	      }
+	      
 	      if (!dark) {
 	        var tbody = document.getElementsByTagName("body")[0];
 	        var tnode = document.createElement('div');           // Create the layer.
@@ -368,6 +380,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 // plugin defaults
 $.fn.mobileSuggHelper.defaults = {
 	popupSuggestionQId : '#entrySuggestionPopup',
+	shadowBackgroundMode : false,
 	acceptableMaxFilterLen : 10,
 	inputEntryTopMargin : 0,
 	useNiceScrollbar : true,
