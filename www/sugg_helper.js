@@ -297,7 +297,8 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		return;
 	      }
 	      
-	      if (targetSuggInput.css('z-index') < 2) {
+	      var zindex = targetSuggInput.css('z-index');
+	      if (isNaN(zindex) || zindex < 2) {
 		console.error("Error. When using 'shadowBackgroundMode' target text input entry 'z-index'\
 			      css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\
 			      \nPlease fix your css for input field or stop using shadowBackgroundMode\
