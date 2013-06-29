@@ -52,18 +52,18 @@ Configuration structure looks like that:
 		}
 	} 
 
-= popupSuggestionQId - id of popup that shows all possible suggestions
-= shadowBackgroundMode - when disabled, then it won't be dark area in background of suggestion popup
-= inputEntryTopMargin - minum margin between top of the window and suggestions popup top-corner
-= useNiceScrollbar - when enabled, then nicescroll library will be used to handling scrolling (looks nicer)
-= popOnTop - if true, then popup will be shown *ABOVE* text input. Otherwise popup will be shown *UNDER* text input
-= rowEntryCssClass - css class id used for every row with data in suggestion popup
-= popupHolderCss - css class data defined for popup container, change those values if it is really needed
+*  popupSuggestionQId - id of popup that shows all possible suggestions
+*  shadowBackgroundMode - when disabled, then it won't be dark area in background of suggestion popup
+*  inputEntryTopMargin - minum margin between top of the window and suggestions popup top-corner
+*  useNiceScrollbar - when enabled, then nicescroll library will be used to handling scrolling (looks nicer)
+*  popOnTop - if true, then popup will be shown **above** text input. Otherwise popup will be shown **under** text input
+*  rowEntryCssClass - css class id used for every row with data in suggestion popup
+*  popupHolderCss - css class data defined for popup container, change those values if it is really needed
 
 ## Global configuration
 
 Configuration is possible via 'defaults' property of 'mobileSuggHelper' object. It will
-work for all plugin instances. It should be called *BEFORE* target plugin instance for
+work for all plugin instances. It should be called **BEFORE** target plugin instance for
 text-input will be created.
 
 	$.fn.mobileSuggHelper.defaults.shadowBackgroundMode = false;
@@ -80,5 +80,5 @@ for configuration)
 											  {popOnTop:false,
 											  shadowBackgroundMode:false});
 											  
-In this example we disabled 'popOnTop' mode, so now suggestions will be shown *UNDER* the
+In this example we disabled 'popOnTop' mode, so now suggestions will be shown **under** the
 text-input. Also disabled 'shadowBackgroundMode'.
