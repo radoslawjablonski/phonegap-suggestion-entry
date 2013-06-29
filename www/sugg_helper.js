@@ -45,7 +45,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		}
 		
 		console.log("Filter = " + filter);
-		if (filter != '' && filter.length <= conf.acceptableMaxFilterLen) {
+		if (filter != '') {
 			// getting results only if filter is set
 			displaySuggestionPopup(suggestionArray, filter);
 		} else {
@@ -386,7 +386,6 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 $.fn.mobileSuggHelper.defaults = {
 	popupSuggestionQId : '#entrySuggestionPopup',
 	shadowBackgroundMode : true,
-	acceptableMaxFilterLen : 10,
 	inputEntryTopMargin : 0,
 	useNiceScrollbar : true,
 	popOnTop : true, // if false then popup will be shown below text input
