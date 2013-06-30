@@ -276,14 +276,14 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		return privPopupSuggestionObj;
 	};
 
-	var grayOut = function (vis, options) {
+	var grayOut = function (vis, opts) {
 	// NOTE: snippet received from http://www.hunlock.com/blogs/Snippets:_Howto_Grey-Out_The_Screen
 	
 		// Pass true to gray out screen, false to ungray
 		// options are optional.  This is a JSON object with the following (optional) properties
 		// opacity:0-100         // Lower number = less grayout higher = more of a blackout 
 		// in any order.  Pass only the properties you need to set.
-		var options = options || {};
+		var options = opts || {};
 		var hideOnClick = options.hideOnclick || false;
 		var zindex = options.zindex || 50;
 		var opacity = options.opacity || 70;
@@ -291,20 +291,16 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		var bgcolor = options.bgcolor || '#000000';
 		var dark=document.getElementById('darkenScreenObject');
 	
-		if (false == conf.shadowBackgroundMode) {
-		// shadowBackgound mode disabled - doing nothing
-		return;
+		if (!conf.shadowBackgroundMode) {
+			// shadowBackgound mode disabled - doing nothing
+			return;
 		}
 	
 		var input_zindex = targetSuggInput.css('z-index');
 		if (isNaN(input_zindex) || input_zindex < 2) {
-		console.error("Error. When using 'shadowBackgroundMode' target text input entry 'z-index'\
-				css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\
-			\nPlease fix your css for input field or stop using shadowBackgroundMode\
-				It can be done by passing {shadowBackgroundMode : false} as second param to \
-				.mobileSuggHelper() on plugin init.");
+		console.error("Error. When using 'shadowBackgroundMode' target text input entry 'z-index' css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\nPlease fix your css for input field or stop using shadowBackgroundMode. It can be done by passing {shadowBackgroundMode : false} as second param to .mobileSuggHelper() on plugin init.");
 		}
-	
+
 		if (!dark) {
 		var tbody = document.getElementsByTagName("body")[0];
 		var tnode = document.createElement('div');           // Create the layer.
@@ -341,10 +337,10 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 		if (hideOnClick) {
 			//adding ontouch close
-		addEventListener("click", 
+			addEventListener("click", 
 			function() {document.getElementById('darkenScreenObject').style.display='none'},
 			false);
-	}
+		}
 
 		} else {
 			dark.style.display='none';
@@ -371,7 +367,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			\
 		</style>").appendTo("head")
 	};
-	
+
 	 return this.filter( "input" ).each(function() {
 		// constructor
 		targetSuggInput = $(this);
