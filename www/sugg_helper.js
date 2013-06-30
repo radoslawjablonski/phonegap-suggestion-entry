@@ -78,9 +78,10 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 
 		var areResultsToShow = false;
 		var resultsAfterFiltering = [];
+		var i = 0;
 		
 		//at first addin only to temporary list
-		for (var i = 0; i < suggestionArray.length; i++) {
+		for (i = 0; i < suggestionArray.length; i++) {
 			// comparing last filter value and ignoring results that names not beginning with
 			// filter (less results to show and also less confusing for user)
 			if (suggestionArray[i] &&
@@ -94,7 +95,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		// clearing prev results and real adding
 		clearPopup();
 		if (areResultsToShow) {
-			for (var i = 0; i < resultsAfterFiltering.length; i++) {
+			for (i = 0; i < resultsAfterFiltering.length; i++) {
 				addRowEntryToPopup(resultsAfterFiltering[i], true);
 			}		 
 		} else {
@@ -344,7 +345,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		if (hideOnClick) {
 			//adding ontouch close
 			addEventListener("click", 
-			function() {document.getElementById('darkenScreenObject').style.display='none'},
+			function() {document.getElementById('darkenScreenObject').style.display='none';},
 			false);
 		}
 	};
@@ -370,7 +371,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		</style>").appendTo("head")
 	};
 
-	 return this.filter( "input" ).each(function() {
+	return this.filter( "input" ).each(function() {
 		// constructor
 		targetSuggInput = $(this);
 		createSuggestionPopupDivIfNeeded();
