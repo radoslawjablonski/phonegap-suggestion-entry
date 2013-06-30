@@ -19,7 +19,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 		$(window).resize(function() {
 			// handle resizing of window, passing true as param meaning resize event only
-			if (false == isPopupHidden) {
+			if (!isPopupHidden) {
 				correctSizeAndPosOfPopup(true);
 				grayOut(true, {zindex: 1});//re-painting gray area
 			}
@@ -46,7 +46,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		}
 		
 		console.log("Filter = " + filter);
-		if (filter != '') {
+		if (filter !== '') {
 			// getting results only if filter is set
 			displaySuggestionPopup(suggestionArray, filter);
 		} else {
@@ -56,26 +56,26 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		}
 	};
 	
-	 //address popup should be hidden when
+	//address popup should be hidden when
 	// a: there are no results
 	// b: when filter is empty
 	var hideSuggestionPopup = function (hide) {
 		isPopupHidden = hide;
-		 
-		if (hide == true) {
+
+		if (hide) {
 			getPopupSuggestionObj().css('visibility', 'hidden');
 			grayOut(false);
 		} else {
-	    		getPopupSuggestionObj().css('visibility', 'visible');
-	  		//making background gray, so popup will be visible
+			getPopupSuggestionObj().css('visibility', 'visible');
+			//making background gray, so popup will be visible
 			grayOut(true, {zindex: 1});
 		}
-	}
-    
+	};
+
 	var displaySuggestionPopup = function(suggestionArray, filterValue) {
-	        // display the address information for all contacts
+		// display the address information for all contacts
 		console.log("Filter value: " + filterValue);
-    	
+
 		var areResultsToShow = false;
 		var resultsAfterFiltering = [];
 		
@@ -83,7 +83,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		for (var i = 0; i < suggestionArray.length; i++) {
 			// comparing last filter value and ignoring results that names not beginning with
 			// filter (less results to show and also less confusing for user)
-			if (suggestionArray[i] != null &&
+			if (suggestionArray[i] &&
 				suggestionArray[i].toLowerCase().indexOf( filterValue.toLowerCase() ) === 0) {
 				
 				resultsAfterFiltering.push(suggestionArray[i]);
@@ -93,12 +93,12 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		
 		// clearing prev results and real adding
 		clearPopup();
-		if (areResultsToShow == true) {
+		if (areResultsToShow) {
 			for (var i = 0; i < resultsAfterFiltering.length; i++) {
 				addRowEntryToPopup(resultsAfterFiltering[i], true);
 			}		 
 		} else {
-			if (filterValue.length == 0) {
+			if (filterValue.length === 0) {
 				// filter is empty, hiding popup
 				hideSuggestionPopup(true);
 				return;
@@ -114,7 +114,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
     
 	var createSuggestionPopupDivIfNeeded = function () {
 		// jQuery always returns an object, so different checking is needed
-		if (privPopupSuggestionObj == null) {
+		if (!privPopupSuggestionObj) {
 			console.log("Creating object for suggestion popup");
 			var popupSuggestionHtmlName = conf.popupSuggestionQId.substr(1);
 			var suggestionDivHtml = "<div id=" + popupSuggestionHtmlName + "></div>";
@@ -135,25 +135,25 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 				privPopupSuggestionObj.niceScroll({autohidemode:true});
 			}
 		}
-		
+
 		return privPopupSuggestionObj;
 	};
 	
 	var correctTopPositionOfPopup = function () {
 		var topNew = targetSuggInput.position().top; 
 		
-		if (true == conf.popOnTop) {
+		if (conf.popOnTop) {
 			topNew = topNew - conf.inputEntryTopMargin - getPopupSuggestionObj().height();
 		} else {
 			topNew += targetSuggInput.outerHeight(true);
 		}
 		
-	  	getPopupSuggestionObj().css('top', topNew);
+		getPopupSuggestionObj().css('top', topNew);
 		console.log("Top: " + topNew + " Heigth popup: " + getPopupSuggestionObj().height() +
-				" pos input top:"
-				+ targetSuggInput.position().top);
+				" pos input top:" +
+				targetSuggInput.position().top);
 	};
-	
+
 	var handleHeightOfPopup = function () {
 		// NOTE: use height from css in case of problems
 		var heightDiff = $('.' + conf.rowEntryCssClass).height();
@@ -169,35 +169,35 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		var possibleVisiblePopupHeigth = 0;
 
 		// counting max space for popup
-		if (true == conf.popOnTop) {
-		    possibleVisiblePopupHeigth = positionInputTop -
+		if (conf.popOnTop) {
+			possibleVisiblePopupHeigth = positionInputTop -
 							(heightDiff + conf.inputEntryTopMargin);
 		} else {
-		    possibleVisiblePopupHeigth = $(window).height()
-		                                 - positionInputTop
-		                                 - targetSuggInput.outerHeight(true)
-		                                 - heightDiff; // to allow some space below
+			possibleVisiblePopupHeigth = $(window).height() -
+						positionInputTop -
+						targetSuggInput.outerHeight(true) -
+						heightDiff; // to allow some space below
 		}
-		
+
 		if (heightNew <= (possibleVisiblePopupHeigth - heightDiff)) {
 			heightNew = heightNew + heightDiff;
-			
+
 			if (!conf.useNiceScrollbar) {
 				// sets overflow to hidden by default
 				getPopupSuggestionObj().css('overflow', 'hidden');
 			}
 		} else {
 			console.log("Content reached max possible size")
-		 	heightNew = possibleVisiblePopupHeigth;
-			
+			heightNew = possibleVisiblePopupHeigth;
+
 			if (!conf.useNiceScrollbar) {
 				getPopupSuggestionObj().css('overflow', 'auto');
 			}
 		}
-    	
-	  	getPopupSuggestionObj().height(heightNew);
-	}
-	
+
+		getPopupSuggestionObj().height(heightNew);
+	};
+
 	var correctSizeAndPosOfPopup = function (resizeEventOnly) {
 		// handling popup size issue
 		// constants. Simple visualisation of problem is below
@@ -230,131 +230,131 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		}
 		
 	};
-	
+
 	var addRowEntryToPopup = function (name, clickable) {
 		createSuggestionPopupDivIfNeeded();
 
-	  	var contactRow = '<div class="' + conf.rowEntryCssClass + '"';
-	  	var rowId = 'suggestion_'+ name;
-	  	contactRow += ' id="'+ rowId + '">';
-    	
-	  	var contactName = '<div class="suggNameVal">' + name + '</div>';
-    	
-	  	contactRow += name;
-	  	contactRow += '</div>';
-    	
+		var contactRow = '<div class="' + conf.rowEntryCssClass + '"';
+		var rowId = 'suggestion_'+ name;
+		contactRow += ' id="'+ rowId + '">';
+
+		var contactName = '<div class="suggNameVal">' + name + '</div>';
+
+		contactRow += name;
+		contactRow += '</div>';
+
 		getPopupSuggestionObj().append(contactRow);
-		
+
 		if (clickable) {
 			document.getElementById(rowId).addEventListener("click", 
 				function() {onEmailRowClicked(name);},
 				false);
 		}
-		
+
 		// correcting size and position
 		correctSizeAndPosOfPopup();
 	};
-	
+
 	function onEmailRowClicked(name) {
 		console.log("suggestion row clicked:"  + name);
-    	
+
 		targetSuggInput.val(name);
-    	
+
 		//when row is clicked it means that we can safely close popup
 		hideSuggestionPopup(true);
 	}
-	
+
 	var clearPopup = function () {
 		console.log("clear popup: ");
 		getPopupSuggestionObj().html('');
 		getPopupSuggestionObj().height(0);
-	}
+	};
 
 	var getPopupSuggestionObj = function() {
-		if (privPopupSuggestionObj == null) {
+		if (!privPopupSuggestionObj) {
 			privPopupSuggestionObj = createSuggestionPopupDivIfNeeded();
 		}
-		
+
 		return privPopupSuggestionObj;
 	};
-	
+
 	var grayOut = function (vis, options) {
-	      // NOTE: snippet received from http://www.hunlock.com/blogs/Snippets:_Howto_Grey-Out_The_Screen
-	    
-	      // Pass true to gray out screen, false to ungray
-	      // options are optional.  This is a JSON object with the following (optional) properties
-	      // opacity:0-100         // Lower number = less grayout higher = more of a blackout 
-	      // in any order.  Pass only the properties you need to set.
-	      var options = options || {};
-	      var hideOnClick = options.hideOnclick || false;
-	      var zindex = options.zindex || 50;
-	      var opacity = options.opacity || 70;
-	      var opaque = (opacity / 100);
-	      var bgcolor = options.bgcolor || '#000000';
-	      var dark=document.getElementById('darkenScreenObject');
-	      
-	      if (false == conf.shadowBackgroundMode) {
+	// NOTE: snippet received from http://www.hunlock.com/blogs/Snippets:_Howto_Grey-Out_The_Screen
+	
+		// Pass true to gray out screen, false to ungray
+		// options are optional.  This is a JSON object with the following (optional) properties
+		// opacity:0-100         // Lower number = less grayout higher = more of a blackout 
+		// in any order.  Pass only the properties you need to set.
+		var options = options || {};
+		var hideOnClick = options.hideOnclick || false;
+		var zindex = options.zindex || 50;
+		var opacity = options.opacity || 70;
+		var opaque = (opacity / 100);
+		var bgcolor = options.bgcolor || '#000000';
+		var dark=document.getElementById('darkenScreenObject');
+	
+		if (false == conf.shadowBackgroundMode) {
 		// shadowBackgound mode disabled - doing nothing
 		return;
-	      }
-	      
-	      var input_zindex = targetSuggInput.css('z-index');
-	      if (isNaN(input_zindex) || input_zindex < 2) {
+		}
+	
+		var input_zindex = targetSuggInput.css('z-index');
+		if (isNaN(input_zindex) || input_zindex < 2) {
 		console.error("Error. When using 'shadowBackgroundMode' target text input entry 'z-index'\
-			      css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\
-			      \nPlease fix your css for input field or stop using shadowBackgroundMode\
-			      It can be done by passing {shadowBackgroundMode : false} as second param to \
-			      .mobileSuggHelper() on plugin init.");
-	      }
-	      
-	      if (!dark) {
-	        var tbody = document.getElementsByTagName("body")[0];
-	        var tnode = document.createElement('div');           // Create the layer.
-	            tnode.style.position='absolute';                 // Position absolutely
-	            tnode.style.top='0px';                           // In the top
-	            tnode.style.left='0px';                          // Left corner of the page
-	            tnode.style.overflow='hidden';                   // Try to avoid making scroll bars            
-	            tnode.style.display='none';                      // Start out Hidden
-	            tnode.id='darkenScreenObject';                   // Name it so we can find it later
-	        tbody.appendChild(tnode);                            // Add it to the web page
-	        dark=document.getElementById('darkenScreenObject');  // Get the object.
-	      }
-	      if (vis) {
-	        // Calculate the page width and height 
-	        if( document.body && ( document.body.scrollWidth || document.body.scrollHeight ) ) {
-	            var pageWidth = document.body.scrollWidth+'px';
-	            var pageHeight = document.body.scrollHeight+'px';
-	        } else if( document.body.offsetWidth ) {
-	          var pageWidth = document.body.offsetWidth+'px';
-	          var pageHeight = document.body.offsetHeight+'px';
-	        } else {
-	           var pageWidth='100%';
-	           var pageHeight='100%';
-	        }   
-	        //set the shader to cover the entire page and make it visible.
-	        dark.style.opacity=opaque;                      
-	        dark.style.MozOpacity=opaque;                   
-	        dark.style.filter='alpha(opacity='+opacity+')'; 
-	        dark.style.zIndex=zindex;        
-	        dark.style.backgroundColor=bgcolor;  
-	        dark.style.width= pageWidth;
-	        dark.style.height= pageHeight;
-	        dark.style.display='block';
-	        
-	        if (hideOnClick) {
-	        	//adding ontouch close
-	        	addEventListener("click", 
-	                function() {document.getElementById('darkenScreenObject').style.display='none'},
-	                false);
-	        }
-	        
-	      } else {
-	         dark.style.display='none';
-	      }
-	    };
-	    
-	    // initializing css automagically
-	    var initSuggHelperCss = function () {
+				css property has to be larget than '1'.\nOtherwise tex-input field will be shadowed!\
+			\nPlease fix your css for input field or stop using shadowBackgroundMode\
+				It can be done by passing {shadowBackgroundMode : false} as second param to \
+				.mobileSuggHelper() on plugin init.");
+		}
+	
+		if (!dark) {
+		var tbody = document.getElementsByTagName("body")[0];
+		var tnode = document.createElement('div');           // Create the layer.
+		tnode.style.position='absolute';                 // Position absolutely
+		tnode.style.top='0px';                           // In the top
+		tnode.style.left='0px';                          // Left corner of the page
+		tnode.style.overflow='hidden';                   // Try to avoid making scroll bars
+		tnode.style.display='none';                      // Start out Hidden
+		tnode.id='darkenScreenObject';                   // Name it so we can find it later
+		tbody.appendChild(tnode);                            // Add it to the web page
+		dark=document.getElementById('darkenScreenObject');  // Get the object.
+		}
+		if (vis) {
+		// Calculate the page width and height 
+		if( document.body && ( document.body.scrollWidth || document.body.scrollHeight ) ) {
+			var pageWidth = document.body.scrollWidth+'px';
+			var pageHeight = document.body.scrollHeight+'px';
+		} else if( document.body.offsetWidth ) {
+			var pageWidth = document.body.offsetWidth+'px';
+			var pageHeight = document.body.offsetHeight+'px';
+		} else {
+			var pageWidth='100%';
+			var pageHeight='100%';
+		}
+		//set the shader to cover the entire page and make it visible.
+		dark.style.opacity=opaque;                      
+		dark.style.MozOpacity=opaque;                   
+		dark.style.filter='alpha(opacity='+opacity+')'; 
+		dark.style.zIndex=zindex;        
+		dark.style.backgroundColor=bgcolor;  
+		dark.style.width= pageWidth;
+		dark.style.height= pageHeight;
+		dark.style.display='block';
+	
+		if (hideOnClick) {
+			//adding ontouch close
+		addEventListener("click", 
+			function() {document.getElementById('darkenScreenObject').style.display='none'},
+			false);
+	}
+
+		} else {
+			dark.style.display='none';
+		}
+	};
+
+	// initializing css automagically
+	var initSuggHelperCss = function () {
 		// moving here css style to achieve simple plugin use, don't need to include
 		// separate css file
 		$("<style type='text/css'> \
@@ -372,8 +372,8 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			}\
 			\
 		</style>").appendTo("head")
-	    };
-	    
+	};
+	
 	 return this.filter( "input" ).each(function() {
 		// constructor
 		targetSuggInput = $(this);
@@ -381,7 +381,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		initEvents();
 		initSuggHelperCss();
 	});
-}
+};
 
 // plugin defaults
 $.fn.mobileSuggHelper.defaults = {
@@ -397,6 +397,6 @@ $.fn.mobileSuggHelper.defaults = {
 		'visibility': 'hidden',
 		'overflow': 'hidden'
 		}
-	}
-	
+	};
+
 }( jQuery ));
