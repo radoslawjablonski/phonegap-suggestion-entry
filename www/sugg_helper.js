@@ -28,13 +28,13 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	
 	var handleKeyDownPriv = function (event, inputField) {
 		var keyCode = ('which' in event) ? event.which : event.keyCode;
-		var backspaceCode = '8';
+		var backspaceCode = 8;
 		
 		var filter = inputField.value;
 		console.log('keycode=' + keyCode);
 		
 		//backspace scenario
-		if (keyCode == backspaceCode) {
+		if (keyCode === backspaceCode) {
 			if (filter.length > 0) {
 				filter = filter.substring(0, filter.length - 1);
 			}
@@ -188,7 +188,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 				getPopupSuggestionObj().css('overflow', 'hidden');
 			}
 		} else {
-			console.log("Content reached max possible size")
+			console.log("Content reached max possible size");
 			heightNew = possibleVisiblePopupHeigth;
 
 			if (!conf.useNiceScrollbar) {
@@ -368,7 +368,7 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 			display: -webkit-box; \
 			}\
 			\
-		</style>").appendTo("head")
+		</style>").appendTo("head");
 	};
 
 	return this.filter( "input" ).each(function() {
