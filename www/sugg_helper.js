@@ -1,5 +1,6 @@
 (function( $ ) {
-	
+"use strict";
+
 $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 	// parameters from input context
 	var suggestionArray = inputSuggArray;
