@@ -238,8 +238,6 @@ $.fn.mobileSuggHelper = function(inputSuggArray, options) {
 		var rowId = 'suggestion_'+ name;
 		contactRow += ' id="'+ rowId + '">';
 
-		var contactName = '<div class="suggNameVal">' + name + '</div>';
-
 		contactRow += name;
 		contactRow += '</div>';
 
